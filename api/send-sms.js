@@ -15,8 +15,8 @@ export default async function handler(req, res) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'customerId': 'C-••••••••••••••••E9',   // ← your real Customer ID
-                    'authToken': 'eyJhbG••••••••••••••••••••••••••••••••••••pOUR0Q', // ← your real Auth Token
+                    'customerId': 'C-51288F77D72D4E9',   // ← your real Customer ID
+                    'authToken': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJDLTUxMjg4Rjc3RDcyRDRFOSIsImlhdCI6MTc3ODg3ODQyOSwiZXhwIjoxOTM2NTU4NDI5fQ.HrjpD7XrW9BnQgxocaGCaLNedgqxyIf1HqofD6Yi8YB6EF3PcifLHPJoqZIJZ50kBhyBBIUEQ_fiBPLIpOUR0Q', // ← your real Auth Token
                 },
                 body: JSON.stringify({
                     countryCode: 'TN',          // Tunisia
