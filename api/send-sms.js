@@ -1,6 +1,4 @@
-// api/send-sms.js
 export default async function handler(req, res) {
-    // Only allow POST
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
@@ -11,15 +9,24 @@ export default async function handler(req, res) {
     }
 
     try {
-        const response = await fetch('https://textbelt.com/text', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                phone: '+216' + phone,    // Tunisian code
-                message: `Votre code de verification Kartoucha : ${code}`,
-                key: 'textbelt',          // free key – 1 SMS/day
-            }),
-        });
+        const response = await fetch(
+            'https://cpaas.messagecentral.com/api/v2/message/send',  // correct base URL
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'customerId': 'C-••••••••••••••••E9',   // ← your real Customer ID
+                    'authToken': 'eyJhbG••••••••••••••••••••••••••••••••••••pOUR0Q', // ← your real Auth Token
+                },
+                body: JSON.stringify({
+                    countryCode: 'TN',          // Tunisia
+                    mobileNumber: phone,        // just the number, no country code
+                    messageText: `Votre code de verification Kartoucha : ${code}`,
+                    messageType: 'SMS',
+                    senderId: 'KRTCH',          // your sender ID
+                }),
+            }
+        );
         const result = await response.json();
         return res.status(200).json(result);
     } catch (error) {
